@@ -1,8 +1,17 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
 export default function GraciasPage() {
+  return (
+    <Suspense fallback={<p className="text-muted">Cargando...</p>}>
+      <GraciasContenido />
+    </Suspense>
+  );
+}
+
+function GraciasContenido() {
   const searchParams = useSearchParams();
   const pedido = searchParams.get("pedido");
   const metodo = searchParams.get("metodo");
@@ -15,7 +24,6 @@ export default function GraciasPage() {
       {metodo === "transferencia" && (
         <div style={{ marginTop: 20 }}>
           <h3>Datos para transferir</h3>
-          {/* Reemplazá esto con tus datos reales */}
           <p>CBU: 0000000000000000000000</p>
           <p>Alias: MI.TIENDA.TECH</p>
           <p className="text-muted">
