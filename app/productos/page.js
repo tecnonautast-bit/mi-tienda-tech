@@ -1,12 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import { categoriaVisiblePara } from "@/lib/precios";
 import ProductCard from "@/components/ProductCard";
 
 export default function ProductosPage() {
+  return (
+    <Suspense fallback={<p className="text-muted">Cargando...</p>}>
+      <ProductosContenido />
+    </Suspense>
+  );
+}
+
+function ProductosContenido() {
   const supabase = createSupabaseBrowserClient();
   const searchParams = useSearchParams();
 
